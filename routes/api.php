@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\SignupController;
+use App\Http\Controllers\Auth\Login;
+use App\Http\Controllers\Auth\CreateUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Auth Routes
-Route::post('/login', [LoginController::class, 'checkUser']);
-Route::post('/signup', [SignupController::class, 'signupUser']);
+Route::post('/signup', [CreateUser::class, 'index']);
+Route::post('/login', [Login::class, 'index']);
