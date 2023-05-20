@@ -17,6 +17,7 @@ class CreateUser extends Controller
             'username' => 'required | min:3',
             'email' => 'required | email',
             'password' => 'required | min:6',
+            'role' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -39,15 +40,21 @@ class CreateUser extends Controller
                 'fullname' => $request->fullname,
                 'username' => $request->username,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
+                'role' => $request->role == 'admin' ? $request->role : 'user',
             ]);
 
             return response([
                 'message' => 'success',
                 'status' => 200,
                 'user' => User::where('email', $request->email)->first(),
-                'token' => User::where('email', $request->email)->first()->createToken('API_TOKEN')->plainTextToken
-            ],200);
+                'token' => (
+                    (User::where('email', $request->email)->value('role') == 'admin')
+                    ? User::where('email', $request->email)->first()->createToken('API_TOKEN', ['admin:roles'])->plainTextToken
+                    :
+                    User::where('email', $request->email)->first()->createToken('API_TOKEN')->plainTextToken
+                )
+            ], 200);
         } catch (\Exception $e) {
             return response([
                 'message' => 'Error Creating User',
