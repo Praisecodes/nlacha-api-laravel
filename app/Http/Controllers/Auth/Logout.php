@@ -16,7 +16,7 @@ class Logout extends Controller
             ], 200);
         } catch (\Exception $e) {
             return response([
-                'message' => 'You\'re already logged out',
+                'message' => 'An Error Occured',
                 'status' => 500,
                 'error' => $e->getMessage()
             ], 500);
