@@ -17,7 +17,7 @@ class GetMenu extends Controller
                 Menu::where('category', $request->input('cat'))->get()
                 : Menu::all()
             ),
-            'token' => ($request->user()->value('role') == 'admin') ? $request->user()->first()->createToken('API_TOKEN', ['admin:roles'])->plainTextToken : $request->user()->first()->createToken('API_TOKEN')->plainTextToken
+            'token' => ($request->user()->value('role') == 'admin') ? $request->user()->first()->createToken('API_TOKEN', ['admin:roles'])->plainTextToken : $request->user()->first()->createToken('API_TOKEN', ['user:role'])->plainTextToken
         ], 200);
     }
 }
