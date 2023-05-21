@@ -33,7 +33,8 @@ class AddMenuItem extends Controller
         }
 
         return response([
-            'message' => 'Access Granted'
+            'message' => 'Access Granted',
+            'status' => 200
         ], 200);
     }
 }

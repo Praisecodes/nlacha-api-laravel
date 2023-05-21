@@ -52,7 +52,7 @@ class CreateUser extends Controller
                     (User::where('email', $request->email)->value('role') == 'admin')
                     ? User::where('email', $request->email)->first()->createToken('API_TOKEN', ['admin:roles'])->plainTextToken
                     :
-                    User::where('email', $request->email)->first()->createToken('API_TOKEN')->plainTextToken
+                    User::where('email', $request->email)->first()->createToken('API_TOKEN', ['user:role'])->plainTextToken
                 )
             ], 200);
         } catch (\Exception $e) {

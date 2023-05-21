@@ -49,7 +49,7 @@ class Login extends Controller
             'token' => ((User::where('username', $request->username)->value('role') == 'admin')?
                 User::where('username', $request->username)->first()->createToken('API_TOKEN', ['admin:roles'])->plainTextToken
                 :
-                User::where('username', $request->username)->first()->createToken('API_TOKEN')->plainTextToken
+                User::where('username', $request->username)->first()->createToken('API_TOKEN', ['user:role'])->plainTextToken
             )
         ], 200);
     }
