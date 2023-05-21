@@ -100,7 +100,7 @@ class AddMenuItem extends Controller
         } catch (\Throwable $th) {
             if(!unlink(public_path($path))){
                 return response([
-                    'message' => 'Image not deleted, please contact server side devs',
+                    'message' => 'Error saving item to database & Image delete failed',
                     'status' => 302
                 ], 302);
             }
